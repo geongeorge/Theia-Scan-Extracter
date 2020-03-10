@@ -1,4 +1,6 @@
 import argparse
+import os
+from extracter.extract import processImage, saveImage,showImage
 
 __author__ = "Geon George"
 __version__ = "0.1.0"
@@ -17,7 +19,7 @@ def main():
     ap.add_argument("-t", '--threshold', type=int, action='store', required=True,
                     help="Set threshold value [0-255]")
 
-    ap.add_argument("-i", '--image', type=int, action='store', required=True,
+    ap.add_argument("-i", '--image', action='store', required=True,
                     help="Set image file")
 
     args = vars(ap.parse_args())
@@ -25,7 +27,9 @@ def main():
     # args['sample'], args['image'] and args['threshold']
 
     # Image file name (and location)
-    image = args['threshold']
+    thresh = args['threshold']
+    image = args['image']
+    showSample = args['sample']
 
     # Check if file exist
     if(not os.path.isfile(image)):
@@ -33,7 +37,12 @@ def main():
         return
 
     # Proceed to process the image
-    # processImage(image)
+    img = processImage(image,thresh)
+
+    if showSample:
+        showImage(img)
+    else:
+        saveImage(img)
 
 
 if __name__ == "__main__":

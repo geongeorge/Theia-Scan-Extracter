@@ -7,6 +7,10 @@ verify_ssl = true
 autopep8 = "*"
 
 [packages]
+pillow = "*"
+pip = "*"
+instructions = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.7"
