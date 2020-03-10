@@ -22,6 +22,9 @@ def main():
     ap.add_argument("-i", '--image', action='store', required=True,
                     help="Set image file")
 
+    ap.add_argument("-o", "--out", required=False, action='store_true',
+                    help="split image into multiple parts as output")
+
     args = vars(ap.parse_args())
 
     # args['sample'], args['image'] and args['threshold']
@@ -30,6 +33,7 @@ def main():
     thresh = args['threshold']
     image = args['image']
     showSample = args['sample']
+    splitOutput = args['out']
 
     # Check if file exist
     if(not os.path.isfile(image)):
@@ -42,7 +46,7 @@ def main():
     if showSample:
         showImage(img)
     else:
-        saveImage(img)
+        saveImage(img,splitOutput)
 
 
 if __name__ == "__main__":

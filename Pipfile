@@ -11,6 +11,7 @@ pillow = "*"
 pip = "*"
 instructions = "*"
 opencv-python = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.7"
