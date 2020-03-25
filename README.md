@@ -12,14 +12,35 @@
 ## `i.py` : image thresholder
 
 ```bash
-python i.py image.py [-s] [-t <num>]
+python i.py image.py [-s] [-t <num>] [-i <image.jpg>] [-o]
 ```
 
-| flag | description | required |
-|------|--------------|---------|
-| s | sample flag  | optional |
-| t | threshold value in &lt;num&gt; | required |
+| flag | description | required | default |
+|------|--------------|---------|---------|
+| s | --sample : sample flag  | optional | false |
+| t | --threshold: threshold value in &lt;num&gt; | required | _ |
+| i | --image: Set image file to use | required  | _ |
+| o | --out: split image into multiple parts as output | optional  | false |
 
+
+### Instructions (sample)
+
+
+**1.Show a sample**
+
+    python i.py -i image.jpg -t 150 -s
+
+**2. Adjust Threshold value till feels correct**
+
+    python i.py -i image.jpg -t 130 -s
+
+**3. Generate ouptuts**
+
+    python i.py -i image.jpg -t 130 -o
+
+**4. Manual check images, Copy ouput folders to corresponding locations, delete the op folder **
+
+**5. Repeat with different image**
 
 
 
