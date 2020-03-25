@@ -38,7 +38,7 @@ python i.py image.py [-s] [-t <num>] [-i <image.jpg>] [-o]
 
     python i.py -i image.jpg -t 130 -o
 
-**4. Manual check images, Copy ouput folders to corresponding locations, delete the op folder **
+**4. Manual check images, Copy ouput folders to corresponding locations, delete the output folder**
 
 **5. Repeat with different image**
 
