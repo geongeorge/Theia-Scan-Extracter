@@ -44,7 +44,7 @@ def main():
     img = processImage(image,thresh)
 
     if showSample:
-        showImage(img)
+        showImage(img,showSample=True)
     else:
         saveImage(img,splitOutput)
 
