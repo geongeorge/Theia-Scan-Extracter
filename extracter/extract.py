@@ -27,20 +27,8 @@ def processImage(im,thresh):
     return gray
 
 
-def showImage(img,showSample=False):
-    thresh = ~np.array(img)  # also invert
-    thresh_img = cv2.cvtColor(thresh,cv2.COLOR_GRAY2BGR)
-    contours,hierarchy = findCountours(thresh)
-    for cnt in contours:
-        x,y,w,h = cv2.boundingRect(cnt)
-        # crop and save
-        if(w>=50 and h >= 50):
-            # Ouput single characters files
-            if(showSample):
-                cv2.rectangle(thresh_img,(x,y),(x+w,y+h),(0,255,0),2)
-                cv2.putText(thresh_img, str(w)+","+str(h), (x, y), cv2.FONT_HERSHEY_SIMPLEX , 2, (0,255, 0),3 )
-        #Add Recty
-    pilImg = Image.fromarray(thresh_img)
+def showImage(img):
+    pilImg = processImage2(img,returnSample=True)
     pilImg.show()
 
 def findCountours(thresh):
@@ -51,14 +39,9 @@ def findCountours(thresh):
 
     return contours,hierarchy
 
-def saveImage(img,split=False,fl="output.jpg"):
-    img.save(fl)
-
-    if(not split):
-        return
-
-
+def processImage2(img,returnSample=False, saveOutput=False):
     thresh = ~np.array(img)  # also invert
+    thresh_img = cv2.cvtColor(thresh,cv2.COLOR_GRAY2BGR)
 
     contours,hierarchy = findCountours(thresh)
 
@@ -70,13 +53,27 @@ def saveImage(img,split=False,fl="output.jpg"):
         x,y,w,h = cv2.boundingRect(cnt)
         # crop and save
         crop_img = thresh[y:y+h, x:x+w]
-        if(w>=100 and h >= 100):
+        if(w>=50 and h >= 50):
+            if(returnSample):
+                cv2.rectangle(thresh_img,(x,y),(x+w,y+h),(0,255,0),2)
+                cv2.putText(thresh_img, str(w)+","+str(h), (x, y), cv2.FONT_HERSHEY_SIMPLEX , 2, (0,255, 0),3 )
             # Ouput single characters files
-            name = np.sum(crop_img)
-            if(len(str(name)) <= 10): #remove if intensity length is > 10
-                cv2.imwrite("output/"+str(i)+"-"+str(len(str(name)))+".jpg", crop_img)
+            if(saveOutput):
+                cv2.imwrite("output/"+str(i)+".jpg", crop_img)
             i+=1
-        #Add Recty
-        # if(showSample):
-        #     cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
-        #     cv2.putText(img, str(w)+","+str(h), (x, y), cv2.FONT_HERSHEY_SIMPLEX , 2, (0,255, 0),3 )
+    if(returnSample):
+        pilImg = Image.fromarray(thresh_img)
+        return pilImg
+    else:
+        return True
+
+def saveImage(img,split=False,fl="output.jpg"):
+    img.save(fl)
+
+    if(not split):
+        return
+
+    #split so process2
+
+    processImage2(img,returnSample=False, saveOutput=True)
+

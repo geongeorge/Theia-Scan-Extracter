@@ -12,6 +12,9 @@ pip = "*"
 instructions = "*"
 opencv-python = "*"
 numpy = "*"
+flask = "*"
+python-dotenv = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.7"

@@ -8,6 +8,11 @@
 </div>
 </div>
 
+## Run Server
+
+1. `pipenv shell`
+2. `pipenv insall`
+3. `flask run`
 
 ## `i.py` : image thresholder
 
