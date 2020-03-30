@@ -1,6 +1,6 @@
 import argparse
 import os
-from extracter.extract import processImage, saveImage,showImage
+from utils.extract import processImage, saveImage,showImage
 
 __author__ = "Geon George"
 __version__ = "0.1.0"
