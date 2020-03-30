@@ -56,7 +56,7 @@ def showThreshImageData(id,name,threshold,minW,minH):
     minH = int(minH)
     threshold = int(threshold)
     img = processImage(getUrl(PROJECT_HOME,id)+"/"+name,threshold)
-    image,contours = getContours(img,minWidth=minW,minHeight=minH)
+    image,contours = getContours(PROJECT_HOME,img,minWidth=minW,minHeight=minH)
 
     response = jsonify({"image":image,"contours":contours})
     return response

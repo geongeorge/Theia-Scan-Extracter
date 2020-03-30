@@ -34,7 +34,7 @@ def saveTempFiles(home, selected, selectedName ,tmpImage,contours):
     img = cv2.imread(tmpFile,cv2.IMREAD_GRAYSCALE)
 
     #make output folder of not exist
-    # os.makedirs("output", exist_ok=True)
+    os.makedirs(home+"/output", exist_ok=True)
     count=0
     for cnt in contours:
 
@@ -86,14 +86,14 @@ def findContours(thresh):
     return contours,hierarchy
 
 # get contours and temp image url
-def getContours(img,minWidth=50,minHeight=50):
+def getContours(home,img,minWidth=50,minHeight=50):
     thresh = ~np.array(img)  # also invert
     contours,hierarchy = findContours(thresh)
     allContours = []
-    os.makedirs("temporary", exist_ok=True)
+    os.makedirs(home+"/temporary/", exist_ok=True)
     # I think png is better
     tempName = "tmp-"+str(uuid.uuid4())+".png"
-    imageUrl = "temporary/"+tempName
+    imageUrl = home+"/temporary/"+tempName
     cv2.imwrite(imageUrl, thresh)
     for cnt in contours:
         x,y,w,h = cv2.boundingRect(cnt)
